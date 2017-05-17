@@ -21,6 +21,7 @@ public class LoginScreen extends javax.swing.JFrame {
     
     private int logcount;
     private String usrType;
+    int employeeId = 0;
     /**
      * Creates new form LoginScreen
      * @param type
@@ -114,24 +115,19 @@ public class LoginScreen extends javax.swing.JFrame {
         getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 420, -1));
         getContentPane().add(msg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 230, 20));
 
-        pack();
+        setSize(new java.awt.Dimension(437, 465));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             String usrname = usrName.getText();
             String pass = new String(passField.getPassword());
-            ResultSet RS = dbcon.search("SELECT * FROM user WHERE user_name='"+usrname+"'AND user_password='"+pass+"' ");
+            ResultSet RS = dbcon.search("SELECT * FROM "+usrType+" WHERE username='"+usrname+"'AND password='"+pass+"' ");
+            
             if(RS.next()){
-                if (usrType.equals("Administrator") ) {
-                    loadProgressBar("Administrator");
-                }else if (usrType.equals("Doctor")) {
-                    loadProgressBar("Doctor");
-                }else if (usrType.equals("Nurse")) {
-                    loadProgressBar("Nurse");
-                }else{
-                    loadProgressBar("LabAssistant");
-                }
+                employeeId = RS.getInt("empId");
+                loadProgressBar(usrType);
             }else{
               logcount++;
               showLoginMsg();
@@ -227,7 +223,7 @@ public class LoginScreen extends javax.swing.JFrame {
     //Animates the progressbar before proceeding to the next window.
     
     private void loadProgressBar(String usrType) {
-        if (usrType.equals("Administrator")) {
+        if (usrType.equals("administrator")) {
             new Thread(new Runnable() {
 
                  @Override
@@ -247,7 +243,27 @@ public class LoginScreen extends javax.swing.JFrame {
                      }
                  }
              }).start();
-        }else if (usrType.equals("Doctor")) {
+        }else if (usrType.equals("doctor")) {
+            new Thread(new Runnable() {
+
+                 @Override
+                 public void run() {
+                     try {
+                        for(int i = 0; i <= 100; i++){
+                            jProgressBar1.setValue(i);
+                            Thread.sleep(25);
+                            if(i == 100){
+                                Doctor_Profile docProf = new Doctor_Profile(employeeId);
+                                docProf.setVisible(true);
+                                dispose();
+                            } 
+                        }
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                 }
+             }).start();
+        }else if (usrType.equals("nurse")) {
             new Thread(new Runnable() {
 
                  @Override
@@ -267,27 +283,7 @@ public class LoginScreen extends javax.swing.JFrame {
                      }
                  }
              }).start();
-        }else if (usrType.equals("Nurse")) {
-            new Thread(new Runnable() {
-
-                 @Override
-                 public void run() {
-                     try {
-                        for(int i = 0; i <= 100; i++){
-                            jProgressBar1.setValue(i);
-                            Thread.sleep(25);
-                            if(i == 100){
-                                /*AdministratorScreen AdmS = new AdministratorScreen();
-                                AdmS.setVisible(true);
-                                dispose();*/
-                            } 
-                        }
-                     } catch (Exception e) {
-                         e.printStackTrace();
-                     }
-                 }
-             }).start();
-        }else if (usrType.equals("LabAssistant")) {
+        }else if (usrType.equals("labtechnician")) {
             new Thread(new Runnable() {
 
                  @Override

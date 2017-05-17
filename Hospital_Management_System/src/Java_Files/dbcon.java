@@ -15,7 +15,7 @@ public class dbcon {
     private static Connection con;
     private static void createNewConnection() throws Exception{
         Class.forName("com.mysql.jdbc.Driver");
-        String db = "jdbc:mysql://localhost:3306/hospital_management";
+        String db = "jdbc:mysql://localhost:3306/swastika";
         String user = "root"; //user name
         String pass = "123"; //user password
         con = DriverManager.getConnection(db,user,pass);

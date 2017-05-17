@@ -13,6 +13,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -37,6 +40,7 @@ String newpath;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -44,8 +48,6 @@ String newpath;
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         img = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -55,23 +57,29 @@ String newpath;
         MaleButton = new javax.swing.JRadioButton();
         FemaleButton = new javax.swing.JRadioButton();
         combo = new javax.swing.JComboBox();
-        usrname = new javax.swing.JTextField();
-        usrpass = new javax.swing.JPasswordField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        contact = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jAddress = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 400));
-        setPreferredSize(new java.awt.Dimension(400, 400));
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(700, 700));
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 700));
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 545));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 545));
+        jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cornerstone", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add A New User ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 250, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 250, 30));
 
         jLabel2.setText("First Name");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
@@ -83,19 +91,13 @@ String newpath;
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jLabel5.setText("Gender");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         jLabel6.setText("Designation");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
-
-        jLabel7.setText("Username");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
-
-        jLabel8.setText("Password");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         img.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 130, 150));
+        jPanel1.add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 130, 150));
 
         jButton1.setText("Upload");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +105,7 @@ String newpath;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, -1));
 
         jButton2.setText("Save");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -111,27 +113,28 @@ String newpath;
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, -1, -1));
 
+        FName.setPreferredSize(new java.awt.Dimension(5, 20));
         FName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FNameActionPerformed(evt);
             }
         });
-        jPanel1.add(FName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 290, 20));
-        jPanel1.add(LName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 290, -1));
-        jPanel1.add(NIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 290, -1));
+        jPanel1.add(FName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 290, 30));
+        jPanel1.add(LName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 290, -1));
+        jPanel1.add(NIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 290, -1));
 
+        buttonGroup1.add(MaleButton);
         MaleButton.setText("Male");
-        jPanel1.add(MaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 50, -1));
+        jPanel1.add(MaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 50, -1));
 
+        buttonGroup1.add(FemaleButton);
         FemaleButton.setText("Female");
-        jPanel1.add(FemaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
+        jPanel1.add(FemaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
 
-        combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Doctor", "Nurse", "Laboratory Assistant" }));
-        jPanel1.add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 140, -1));
-        jPanel1.add(usrname, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 290, -1));
-        jPanel1.add(usrpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 290, -1));
+        combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "doctor", "nurse", "labtechnician", "administrator" }));
+        jPanel1.add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 140, -1));
 
         jButton3.setText("Cancel");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +142,7 @@ String newpath;
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, -1, -1));
 
         jButton4.setText("Exit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -147,22 +150,41 @@ String newpath;
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 580, -1, -1));
+
+        jLabel9.setText("Date of Birth");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+
+        jLabel10.setText("contact");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 290, -1));
+
+        jLabel11.setText("Address");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+
+        jAddress.setColumns(20);
+        jAddress.setRows(5);
+        jScrollPane1.setViewportView(jAddress);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 280, 60));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 370, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(435, 646));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void FNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FNameActionPerformed
@@ -182,6 +204,7 @@ String newpath;
                 Image i = ImageIO.read(f1);
                 i = i.getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH);
                 img.setIcon(new  ImageIcon(i));
+                
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -191,24 +214,35 @@ String newpath;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //Save into tables here
         
-        String table1 = "user";
+        String table = combo.getSelectedItem().toString();
         String firstName = FName.getText();
         String lastName = LName.getText();        
         String Gender;
         String Desig = combo.getSelectedItem().toString();
         String IDNum = NIC.getText();
+        String dateOB = ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText();
         if (MaleButton.isSelected()) {
             Gender = "M";
         }else{
             Gender = "F";
-        }    
-    try {        
-        dbcon.IUD("INSERT INTO"+table1+"values('"+usrname.getText()+"','"+usrpass.getPassword()+"')");
-        combo.setSelectedIndex(0);
-        FName.setText(null);
-        LName.setText(null);
-        NIC.setText(null);
+        }
+        String contactNum = contact.getText();
+        String address = jAddress.getText();
         
+    try {        
+        dbcon.IUD("INSERT INTO employee (FName, LName, DOB, gender, NIC, address, contact, imgPath) VALUES ('"+firstName+"','"+lastName+"','"+dateOB+"','"+Gender+"', '"+IDNum+"', '"+address+"', '"+contactNum+"', '"+newpath+"')"); //This query is ok
+        
+        // create a jframe
+        JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+        
+        // show a joptionpane dialog using showMessageDialog
+        JOptionPane.showMessageDialog(frame,
+            "Successfully added as an employee","Query Executed",JOptionPane.INFORMATION_MESSAGE);
+        
+        ResetFields();
+        
+        create_UName_Pword newUNameandPass = new create_UName_Pword(IDNum, table);
+        newUNameandPass.setVisible(true);
         
     } catch (Exception ex) {
         ex.printStackTrace();
@@ -217,6 +251,7 @@ String newpath;
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -225,8 +260,7 @@ String newpath;
         LName.setText(null);
         NIC.setText(null);
         MaleButton.setSelected(true);
-        usrname.setText(null);
-        usrpass.setText(null);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -270,22 +304,37 @@ String newpath;
     private javax.swing.JTextField LName;
     private javax.swing.JRadioButton MaleButton;
     private javax.swing.JTextField NIC;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox combo;
+    private javax.swing.JTextField contact;
     private javax.swing.JLabel img;
+    private javax.swing.JTextArea jAddress;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField usrname;
-    private javax.swing.JPasswordField usrpass;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void ResetFields() {
+        combo.setSelectedIndex(0);
+        FName.setText(null);
+        LName.setText(null);
+        NIC.setText(null);
+        contact.setText(null);
+        jAddress.setText(null);
+        
+    }
 }

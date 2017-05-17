@@ -92,10 +92,11 @@ public class MainMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(586, 542));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /*
@@ -103,31 +104,32 @@ public class MainMenu extends javax.swing.JFrame {
         *This helps opening the following window. 
     */
     private void labAssistantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labAssistantButtonActionPerformed
-        LoginScreen lALogin = new LoginScreen("LabAssistant");
+        LoginScreen lALogin = new LoginScreen("labtechnician");
         lALogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_labAssistantButtonActionPerformed
 
     private void doctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorButtonActionPerformed
-        LoginScreen doctorLogin = new LoginScreen("Doctor");
+        LoginScreen doctorLogin = new LoginScreen("doctor");
         doctorLogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_doctorButtonActionPerformed
 
     private void nurseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nurseButtonActionPerformed
-        LoginScreen nurseLogin = new LoginScreen("Nurse");
+        LoginScreen nurseLogin = new LoginScreen("nurse");
         nurseLogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_nurseButtonActionPerformed
 
     private void AdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButtonActionPerformed
-        LoginScreen AdminLogin = new LoginScreen("Administrator");
+        LoginScreen AdminLogin = new LoginScreen("administrator");
         AdminLogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AdminButtonActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

@@ -80,6 +80,8 @@ public class Attendance_Marker extends javax.swing.JFrame {
         jLabel4.setText("In Time");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
         jPanel1.add(timePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
+
+        jDateChooser1.setDateFormatString("yyyy-MM-d"); // NOI18N
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         jLabel5.setText("Out Time");
@@ -129,12 +131,14 @@ public class Attendance_Marker extends javax.swing.JFrame {
         String NIC = nic.getText();
         String AttendedDate = ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText();
         String InTime = timePicker1.getTimeStringOrEmptyString();
-        String OutTime = timePicker2.getTimeStringOrEmptyString();
+        String OutTime = timePicker2.getTimeStringOrEmptyString();        
         
-        int employId;
+        int employId = 0;
         try {
             ResultSet RS = dbcon.search("SELECT empId FROM employee WHERE employee.NIC='"+NIC+"'");
-            employId = RS.getInt(1);
+            while (RS.next()) {                
+                employId = RS.getInt(1);
+            }
             dbcon.IUD("INSERT INTO attendance VALUES ("+employId+", '"+AttendedDate+"', '"+InTime+"', '"+OutTime+"')");
         } catch (Exception ex) {
             ex.printStackTrace();

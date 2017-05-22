@@ -5,6 +5,11 @@
  */
 package Java_Files;
 
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Pasindu
@@ -16,6 +21,11 @@ public class Admin_Dashboard extends javax.swing.JFrame {
      */
     public Admin_Dashboard() {
         initComponents();
+        getCount("employee","empId", docCount );
+        getCount("labtechnician", "empId", LTCount);
+        getCount("nurse", "empId", NurseCount);
+        getCount("patient", "patientId", patientCount);
+        getCount("administrator", "empId", adminCount);
     }
 
     /**
@@ -29,81 +39,142 @@ public class Admin_Dashboard extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        docCount = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        LTCount = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        adminCount = new javax.swing.JLabel();
+        patientCount = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        NurseCount = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 500));
 
+        jPanel2.setMinimumSize(new java.awt.Dimension(390, 400));
+        jPanel2.setPreferredSize(new java.awt.Dimension(390, 400));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setBackground(new java.awt.Color(51, 51, 255));
         jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Patients");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 70, 50));
-
-        jLabel3.setBackground(new java.awt.Color(51, 51, 255));
-        jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Doctors");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 100, 50));
-
-        jLabel4.setBackground(new java.awt.Color(51, 51, 255));
-        jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Patients");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 100, 50));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 70, 50));
 
         jLabel5.setBackground(new java.awt.Color(51, 51, 255));
         jLabel5.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Nurses");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 250, 100, 50));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 100, 50));
 
         jButton1.setText("Back");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, -1, -1));
 
         jButton2.setText("Exit");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, -1));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Cornerstone", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Dashboard");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 200, 30));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 200, 30));
 
         jLabel6.setBackground(new java.awt.Color(51, 51, 255));
         jLabel6.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Lab Assistants");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 100, 50));
+        jLabel6.setText("Lab");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 100, 50));
 
         jLabel7.setBackground(new java.awt.Color(51, 51, 255));
         jLabel7.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Admins");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 190, 70, 50));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 70, 50));
+
+        jLabel3.setBackground(new java.awt.Color(51, 51, 255));
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Doctors");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 100, 50));
+
+        docCount.setBackground(new java.awt.Color(51, 51, 255));
+        docCount.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        docCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(docCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 60, 20));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/circles.png"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 100, 110));
+
+        LTCount.setBackground(new java.awt.Color(51, 51, 255));
+        LTCount.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        LTCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(LTCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 60, 20));
+
+        jLabel14.setBackground(new java.awt.Color(51, 51, 255));
+        jLabel14.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Assistant");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 100, 50));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/circles.png"))); // NOI18N
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
+
+        adminCount.setBackground(new java.awt.Color(51, 51, 255));
+        adminCount.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        adminCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(adminCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 60, 20));
+
+        patientCount.setBackground(new java.awt.Color(51, 51, 255));
+        patientCount.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        patientCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(patientCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 60, 20));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/circles.png"))); // NOI18N
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, -1, -1));
+
+        NurseCount.setBackground(new java.awt.Color(51, 51, 255));
+        NurseCount.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        NurseCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(NurseCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 60, 20));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/circles.png"))); // NOI18N
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/circles.png"))); // NOI18N
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(467, 452));
+        setSize(new java.awt.Dimension(517, 559));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,15 +212,36 @@ public class Admin_Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LTCount;
+    private javax.swing.JLabel NurseCount;
+    private javax.swing.JLabel adminCount;
+    private javax.swing.JLabel docCount;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel patientCount;
     // End of variables declaration//GEN-END:variables
+
+    private void getCount(String type, String columnName, JLabel label) {
+        try {
+            ResultSet RS = dbcon.search("SELECT COUNT("+columnName+") FROM "+type+"");
+            while (RS.next()) {                
+                label.setText(RS.getString(1));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

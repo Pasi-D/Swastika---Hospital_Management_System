@@ -19,9 +19,11 @@ public class Administrator_Screen extends javax.swing.JFrame {
     /**
      * Creates new form Administrator_Screen
      */
-    public Administrator_Screen() {
+    private int employeeId;
+    public Administrator_Screen(int empld) {
         initComponents();
         showtime();
+        employeeId = empld;
     }
     
     void showtime() {
@@ -141,11 +143,13 @@ public class Administrator_Screen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+        Attendance_Marker AttendMark = new Attendance_Marker();
+        AttendMark.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        payment_Gateway payPhone = new payment_Gateway();
+        payment_Screen payPhone = new payment_Screen(employeeId);
         payPhone.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -185,7 +189,7 @@ public class Administrator_Screen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Administrator_Screen().setVisible(true);
+                new Administrator_Screen(0).setVisible(true);
             }
         });
     }

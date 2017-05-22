@@ -233,7 +233,7 @@ public class LoginScreen extends javax.swing.JFrame {
                             jProgressBar1.setValue(i);
                             Thread.sleep(25);
                             if(i == 100){
-                                Administrator_Screen AdminScreen = new Administrator_Screen();
+                                Administrator_Screen AdminScreen = new Administrator_Screen(employeeId);
                                 AdminScreen.setVisible(true);
                                 dispose();                                        
                             } 

@@ -112,15 +112,20 @@ public class Patients_Search extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int patientId = 0;
         try {
-            ResultSet RS = dbcon.search("SELECT * FROM patient WHERE wardId="+wardJtext.getText());
-            DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+            ResultSet RS = dbcon.search("SELECT * FROM patient WHERE wardId="+Integer.parseInt(wardJtext.getText()));
             while (RS.next()) {                
+                patientId = RS.getInt(1);
+            }
+            ResultSet RS2 = dbcon.search("SELECT patient.FName, patient.gender, bedId.bedId, patient.admitDate FROM patient,bedId WHERE patient.patientId="+patientId);
+            DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+            while (RS2.next()) {                
                 Vector v = new Vector();
-                v.add(RS.getString("FName"));
-                v.add(RS.getString("gender"));
-                v.add(RS.getInt("bedId"));
-                v.add(RS.getDate("admitDate").toString());
+                v.add(RS2.getString("FName"));
+                v.add(RS2.getString("gender"));
+                v.add(RS2.getInt("bedId"));
+                v.add(RS2.getDate("admitDate").toString());
                 dtm.addRow(v);
             }
         } catch (Exception ex) {

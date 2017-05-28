@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -86,9 +88,9 @@ public class Add_Patients extends javax.swing.JFrame {
 
         jLabel4.setText("NIC");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
-        jPanel1.add(Fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 300, 30));
-        jPanel1.add(Lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 300, 30));
-        jPanel1.add(nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 300, 30));
+        jPanel1.add(Fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 340, 30));
+        jPanel1.add(Lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 340, 30));
+        jPanel1.add(nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 340, 30));
 
         jLabel5.setText("Gender");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
@@ -100,18 +102,18 @@ public class Add_Patients extends javax.swing.JFrame {
         jPanel1.add(FemaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
 
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 140, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 160, -1));
 
         jLabel9.setText("Date of Birth");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         jLabel6.setText("Guardian Name");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
-        jPanel1.add(gname, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 300, 30));
+        jPanel1.add(gname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 300, 30));
 
         jLabel7.setText("Guardian Contact");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
-        jPanel1.add(gcontact, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 300, 30));
+        jPanel1.add(gcontact, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 300, 30));
 
         jLabel8.setText("Ward Number");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
@@ -122,17 +124,17 @@ public class Add_Patients extends javax.swing.JFrame {
                 combowardActionPerformed(evt);
             }
         });
-        jPanel1.add(comboward, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 110, -1));
+        jPanel1.add(comboward, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 150, -1));
 
         jLabel10.setText("Allocated Bed Number");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, -1, -1));
-        jPanel1.add(bedId, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 90, 30));
+        jPanel1.add(bedId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 90, 30));
 
         jLabel11.setText("Admitted Date");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         jDateChooser2.setDateFormatString("yyyy-MM-d");
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 140, 20));
+        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 140, 30));
 
         jLabel12.setText("Address");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
@@ -141,11 +143,11 @@ public class Add_Patients extends javax.swing.JFrame {
         jaddress.setRows(5);
         jScrollPane1.setViewportView(jaddress);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 300, 60));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 330, 60));
 
         jLabel14.setText("Consulted Doctor ID");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
-        jPanel1.add(docId, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 90, 30));
+        jPanel1.add(docId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 90, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -165,7 +167,7 @@ public class Add_Patients extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 170, 100));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 170, 100));
 
         jButton1.setFont(new java.awt.Font("Verdana Pro Cond", 0, 14)); // NOI18N
         jButton1.setText("view");
@@ -205,14 +207,14 @@ public class Add_Patients extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(432, 644));
+        setSize(new java.awt.Dimension(461, 644));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -250,10 +252,29 @@ public class Add_Patients extends javax.swing.JFrame {
         int AllocatedBedId = Integer.parseInt(bedId.getText());
         int consultDocId = Integer.parseInt(docId.getText());
         try {
-            dbcon.IUD("INSERT INTO patient(FName, LName, gender, NIC, DOB, address, guardianName, guardianContact, wardId, bedId, admitDate, consultDocId) VALUES('"+FirstName+"', '"+LastName+"', '"+Gender+"', '"+NIC+"', '"+dateOB+"', '"+address+"', '"+guardianName+"', '"+guardianContact+"', "+wardId+", "+AllocatedBedId+", '"+admitDate+"', "+consultDocId+")");
+            dbcon.IUD("INSERT INTO patient(FName, LName, gender, NIC, DOB, address, guardianName, guardianContact, wardId, admitDate, consultDocId) VALUES('"+FirstName+"', '"+LastName+"', '"+Gender+"', '"+NIC+"', '"+dateOB+"', '"+address+"', '"+guardianName+"', '"+guardianContact+"', "+wardId+",  '"+admitDate+"', "+consultDocId+")");
+            ResultSet RS = dbcon.search("SELECT patientId from patient WHERE NIC='"+NIC+"'");
+            int patientId = 0;
+            while (RS.next()) {                
+                patientId = RS.getInt(1);
+            }
+            dbcon.IUD("INSERT INTO bedId(bedId, patientId, wardId) VALUES("+AllocatedBedId+","+patientId+", "+wardId+")");
         } catch (Exception ex) {
             ex.printStackTrace();
+            // create a jframe
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+
+            // show a joptionpane dialog using showMessageDialog
+            JOptionPane.showMessageDialog(frame,
+                "Oops something went wrong","Query Failed",JOptionPane.ERROR_MESSAGE);
         }
+        
+        // create a jframe
+        JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+        
+        // show a joptionpane dialog using showMessageDialog
+        JOptionPane.showMessageDialog(frame,
+            "Successfully added","Query Executed",JOptionPane.INFORMATION_MESSAGE);
         clearFields();
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -181,6 +181,7 @@ public class Lab_Techician_Profile extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadProfilePic() {
+        //Loads the profile picture for the user
         String imgPath = null;
         try {
             

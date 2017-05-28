@@ -98,7 +98,9 @@ public class Add_Patients extends javax.swing.JFrame {
 
         FemaleButton.setText("Female");
         jPanel1.add(FemaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 140, -1));
 
         jLabel9.setText("Date of Birth");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
@@ -114,7 +116,7 @@ public class Add_Patients extends javax.swing.JFrame {
         jLabel8.setText("Ward Number");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
-        comboward.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "General surgery", "Maternity", "Pediatrics", "Oncology", "Gynecologist" }));
+        comboward.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maternity", "Pediatrics", "Oncology", "Gynecologist", "General surgery" }));
         comboward.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combowardActionPerformed(evt);
@@ -128,7 +130,9 @@ public class Add_Patients extends javax.swing.JFrame {
 
         jLabel11.setText("Admitted Date");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, -1, 30));
+
+        jDateChooser2.setDateFormatString("yyyy-MM-d");
+        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 140, 20));
 
         jLabel12.setText("Address");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
@@ -241,12 +245,12 @@ public class Add_Patients extends javax.swing.JFrame {
         String address = jaddress.getText();
         String guardianName = gname.getText();
         String guardianContact = gcontact.getText();
-        int wardId = comboward.getSelectedIndex() + 1;
+        int wardId = comboward.getSelectedIndex();
         String admitDate = ((JTextField)jDateChooser2.getDateEditor().getUiComponent()).getText();
         int AllocatedBedId = Integer.parseInt(bedId.getText());
         int consultDocId = Integer.parseInt(docId.getText());
         try {
-            dbcon.IUD("INSERT INTO patient patient(FName, LName, gender, NIC, DOB, address, guardianName, guardianContact, wardId, bedId, admitDate, cosultDocId) VALUES('"+FirstName+"', '"+LastName+"', '"+Gender+"', '"+NIC+"', '"+dateOB+"', '"+address+"', '"+guardianName+"', '"+guardianContact+"', "+wardId+", "+AllocatedBedId+", '"+admitDate+"', "+consultDocId+")");
+            dbcon.IUD("INSERT INTO patient(FName, LName, gender, NIC, DOB, address, guardianName, guardianContact, wardId, bedId, admitDate, consultDocId) VALUES('"+FirstName+"', '"+LastName+"', '"+Gender+"', '"+NIC+"', '"+dateOB+"', '"+address+"', '"+guardianName+"', '"+guardianContact+"', "+wardId+", "+AllocatedBedId+", '"+admitDate+"', "+consultDocId+")");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

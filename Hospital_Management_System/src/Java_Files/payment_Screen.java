@@ -86,7 +86,7 @@ public class payment_Screen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        payment_Gateway patPays = new payment_Gateway();
+        payment_Gateway patPays = new payment_Gateway(employeeId);
         patPays.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

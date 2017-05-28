@@ -113,7 +113,9 @@ public class LoginScreen extends javax.swing.JFrame {
 
         jProgressBar1.setStringPainted(true);
         getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 420, -1));
-        getContentPane().add(msg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 230, 20));
+
+        msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(msg, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 230, 20));
 
         setSize(new java.awt.Dimension(437, 465));
         setLocationRelativeTo(null);
@@ -194,6 +196,7 @@ public class LoginScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void showLoginMsg() {
+        //Not a proper System Lock. But if the user fails after the third attempt all user input fields get locked
         if(logcount==1){
             msg.setText("First Attempt Failed");
             clearfields();
@@ -220,9 +223,9 @@ public class LoginScreen extends javax.swing.JFrame {
         passField.setText(null);
     }
     
-    //Animates the progressbar before proceeding to the next window.
-    
     private void loadProgressBar(String usrType) {
+        //Animates the progressbar before proceeding to the next window.
+    
         if (usrType.equals("administrator")) {
             new Thread(new Runnable() {
 
@@ -273,9 +276,9 @@ public class LoginScreen extends javax.swing.JFrame {
                             jProgressBar1.setValue(i);
                             Thread.sleep(25);
                             if(i == 100){
-                                /*AdministratorScreen AdmS = new AdministratorScreen();
-                                AdmS.setVisible(true);
-                                dispose();*/
+                                NurseProfile nurseScreen = new NurseProfile(employeeId);
+                                nurseScreen.setVisible(true);
+                                dispose();
                             } 
                         }
                      } catch (Exception e) {
@@ -293,9 +296,9 @@ public class LoginScreen extends javax.swing.JFrame {
                             jProgressBar1.setValue(i);
                             Thread.sleep(25);
                             if(i == 100){
-                                /*AdministratorScreen AdmS = new AdministratorScreen();
-                                AdmS.setVisible(true);
-                                dispose();*/
+                                Lab_Techician_Profile LTScreen = new Lab_Techician_Profile(employeeId);
+                                LTScreen.setVisible(true);
+                                dispose();
                             } 
                         }
                      } catch (Exception e) {

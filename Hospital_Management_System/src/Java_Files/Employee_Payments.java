@@ -8,10 +8,15 @@ package Java_Files;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,7 +29,10 @@ public class Employee_Payments extends javax.swing.JFrame {
      */
     private String NICNum;
     private String Designation;
-    int adminempId;
+    private int adminempId;
+    private int employeeId;
+    private long attendeddDays;
+    private String checkedPerson;
     public Employee_Payments(int adminempId) {
         this.adminempId = adminempId;
         initComponents();
@@ -37,7 +45,7 @@ public class Employee_Payments extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent ae) {
                 Date d = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss:a");
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yy/MM/dd");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("yy-MM-dd");
                 String tt = sdf.format(d);
                 String dt = sdf2.format(d);
                 time.setText(tt);
@@ -70,7 +78,7 @@ public class Employee_Payments extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jDesignationTxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        payJText = new javax.swing.JTextField();
         time = new javax.swing.JLabel();
         date = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -78,6 +86,7 @@ public class Employee_Payments extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        errorMsg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,7 +137,7 @@ public class Employee_Payments extends javax.swing.JFrame {
 
         jLabel9.setText("Payment");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 210, -1));
+        jPanel1.add(payJText, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 210, -1));
 
         time.setText("Time");
         jPanel1.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 90, -1));
@@ -141,9 +150,19 @@ public class Employee_Payments extends javax.swing.JFrame {
         jPanel1.add(checkedPrson, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 200, 20));
 
         jButton2.setText("Record Data");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
         jButton4.setText("Exit");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, -1, -1));
 
         jButton5.setText("Tabulate");
@@ -154,6 +173,7 @@ public class Employee_Payments extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 259, 60, 20));
+        jPanel1.add(errorMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 240, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,41 +205,94 @@ public class Employee_Payments extends javax.swing.JFrame {
         
         try {
             ResultSet RS = dbcon.search("SELECT * FROM employee WHERE NIC='"+NICNum +"'");
-            NameTxt.setText(RS.getString("FName") + " " + RS.getString("LName"));            
-            ToTxt.setText(time.getText());
-            int empId = RS.getInt("empId");
-            /*Amount due has to be calculated from the difference of dates between from and to + designation has to be considered*/
-            /*Finding designation will be the hardest part*/
-            ResultSet RSDoc = dbcon.search("SELECT docId FROM doctor WHERE empId="+empId+"");
-            ResultSet RSNurse = dbcon.search("SELECT nurseId FROM nurse WHERE empId="+empId+"");
-            //ResultSet RSLT = dbcon.search("SELECT labTechId FROM labtechnician WHERE empId="+empId+"");
-            //Theres no point in doing the last search query
-            if(RSDoc.next()){
-                Designation = "Doctor";
-            }else if (RSNurse.next()) {
-                Designation = "Nurse";
+            if (RS.next()) {
+                employeeId = RS.getInt("empId");
+                NameTxt.setText(RS.getString("FName") + " " + RS.getString("LName"));            
+                ToTxt.setText(time.getText());
+                int empId = RS.getInt("empId");
+                /*Amount due has to be calculated from the difference of dates between from and to + designation has to be considered*/
+                /*Finding designation is done through a set of search queries executed using dbcon file*/
+                ResultSet RSDoc = dbcon.search("SELECT docId FROM doctor WHERE empId="+empId+"");
+                ResultSet RSNurse = dbcon.search("SELECT nurseId FROM nurse WHERE empId="+empId+"");
+                ResultSet RSLT = dbcon.search("SELECT labTechId FROM labtechnician WHERE empId="+empId+"");
+
+                if(RSDoc.next()){
+                    Designation = "Doctor";
+                }else if (RSNurse.next()) {
+                    Designation = "Nurse";
+                }else if(RSLT.next()){
+                    Designation = "Lab Technician";
+                }
             }else{
-                Designation = "Lab Technician";
+                errorMsg.setText("No such record found. Please recheck the NIC.");
             }
             
         } catch (Exception ex) {
             ex.printStackTrace();
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+
+            JOptionPane.showMessageDialog(frame,
+                "Something went Wrong",
+                "Oops",
+                JOptionPane.ERROR_MESSAGE);
+        
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //To calculate the payment
-        /*
+        try {
+            //To calculate the payment
+            /*
             Payment Criteria
             Doctor === 800 LKR per day
             LabTechnician === 400 LKR per day
             Nurse === 200 LKR  per day
-        */
+            */
+            
+            String FromDate = ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).getText();
+            String Today = ToTxt.getText();
+            
+            attendeddDays = dateDifference(FromDate, Today);
+            
+            if (Designation.equals("Doctor")) {
+               payJText.setText(String.valueOf((float)800.00* attendeddDays));
+            }else if (Designation.equals("Nurse")) {
+               payJText.setText(String.valueOf((float)200.00* attendeddDays)); 
+            }else if(Designation.equals("Lab Technician")){
+               payJText.setText(String.valueOf((float)400.00* attendeddDays));
+            }
+            
+                                  
+            //Sets the checkedby attribute
+            ResultSet RS = dbcon.search("SELECT FName, LName FROM employee WHERE empId="+adminempId+"");
+            checkedPerson = RS.getString("FName") + " " + RS.getString("LName");
+            checkedPrson.setText(checkedPerson);
         
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         
-        
-       //Sets the checkedIn attribute
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            dbcon.IUD("INSERT INTO emp_payment(empId, attended_days, payment, checkedBy) VALUES ("+employeeId+", "+attendeddDays+", "+(float)Integer.parseInt(payJText.getText())+", "+checkedPerson+")");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+
+            JOptionPane.showMessageDialog(frame,
+                "Something went Wrong",
+                "Oops",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +335,7 @@ public class Employee_Payments extends javax.swing.JFrame {
     private javax.swing.JTextField ToTxt;
     private javax.swing.JLabel checkedPrson;
     private javax.swing.JLabel date;
+    private javax.swing.JLabel errorMsg;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -278,7 +352,23 @@ public class Employee_Payments extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField payJText;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
+    
+    private long dateDifference(String initDay, String finalDay) {
+        //Calculates the date difference for two String parameters - First date and last date
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long days = 0;
+        try {
+            Date date1 = myFormat.parse(initDay);
+            Date date2 = myFormat.parse(finalDay);
+            long diff = date2.getTime() - date1.getTime();
+            days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return days;
+    }
 }

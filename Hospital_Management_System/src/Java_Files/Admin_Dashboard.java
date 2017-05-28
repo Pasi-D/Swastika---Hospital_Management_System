@@ -19,9 +19,11 @@ public class Admin_Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Admin_Dashboard
      */
-    public Admin_Dashboard() {
+    private int employeeId;
+    public Admin_Dashboard(int empId) {
         initComponents();
-        getCount("employee","empId", docCount );
+        employeeId = empId;
+        getCount("doctor","docId", docCount );
         getCount("labtechnician", "empId", LTCount);
         getCount("nurse", "empId", NurseCount);
         getCount("patient", "patientId", patientCount);
@@ -78,6 +80,11 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 100, 50));
 
         jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, -1, -1));
 
         jButton2.setText("Exit");
@@ -176,6 +183,12 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        Administrator_Screen AdminScreen = new Administrator_Screen(employeeId);
+        AdminScreen.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -206,7 +219,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin_Dashboard().setVisible(true);
+                new Admin_Dashboard(0).setVisible(true);
             }
         });
     }

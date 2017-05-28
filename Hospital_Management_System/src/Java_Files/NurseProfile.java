@@ -55,7 +55,7 @@ public class NurseProfile extends javax.swing.JFrame {
         jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 100, 120));
 
         nurseName.setFont(new java.awt.Font("Verdana Pro Cond Light", 1, 24)); // NOI18N
-        jPanel1.add(nurseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 130, 40));
+        jPanel1.add(nurseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 130, 30));
 
         jLabel4.setFont(new java.awt.Font("Verdana Pro Cond Light", 1, 24)); // NOI18N
         jLabel4.setText("Hello");
@@ -63,6 +63,11 @@ public class NurseProfile extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jButton1.setText("Add Patients");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 140, 40));
 
         jButton2.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -78,6 +83,11 @@ public class NurseProfile extends javax.swing.JFrame {
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, -1));
 
         jButton4.setText("Exit");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -99,6 +109,17 @@ public class NurseProfile extends javax.swing.JFrame {
         Patients_Search viewPatients = new Patients_Search();
         viewPatients.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Add_Patients createNewPatientUI = new Add_Patients();
+        createNewPatientUI.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

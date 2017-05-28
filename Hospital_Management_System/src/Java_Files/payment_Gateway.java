@@ -26,8 +26,10 @@ public class payment_Gateway extends javax.swing.JFrame {
      * Creates new form payment_Gateway
      */
     private String NICnum;
-    public payment_Gateway() {
+    private int AdministratorEmpId;
+    public payment_Gateway(int adminEmpId) {
         //This is the payment gateway for patients
+        AdministratorEmpId = adminEmpId;
         initComponents();
     }
 
@@ -72,6 +74,7 @@ public class payment_Gateway extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        errorMsg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,7 +87,7 @@ public class payment_Gateway extends javax.swing.JFrame {
 
         jLabel2.setText("NIC");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 40, -1));
-        jPanel1.add(NICText, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 210, 20));
+        jPanel1.add(NICText, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 210, 30));
 
         jLabel3.setText("From");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
@@ -185,6 +188,7 @@ public class payment_Gateway extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("LKR");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, -1, -1));
+        jPanel1.add(errorMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 230, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,13 +210,24 @@ public class payment_Gateway extends javax.swing.JFrame {
         
         try {
             ResultSet RS = dbcon.search("SELECT * FROM patient WHERE NIC='"+NICnum+"'");
-            NameTxt.setText(RS.getString("FName") + " " + RS.getString("LName"));
-            FromTxt.setText(RS.getString("admitDate"));
-            BedIDTxt.setText(String.valueOf(RS.getInt("bedId")));
+            if (RS.next()) {                  
+                errorMsg.setText(null); 
+                NameTxt.setText(RS.getString("FName") + " " + RS.getString("LName"));
+                FromTxt.setText(RS.getString("admitDate"));
+                BedIDTxt.setText(String.valueOf(RS.getInt("bedId")));
+            }else{
+                errorMsg.setText("No such record found. Please recheck the NIC."); //Generates an error message
+            }
             /*Amount due has to be calculated from the difference of dates between from and to*/
             
         } catch (Exception ex) {
             ex.printStackTrace();
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+
+            JOptionPane.showMessageDialog(frame,
+                "Something went Wrong",
+                "Oops",
+                JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -299,7 +314,7 @@ public class payment_Gateway extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new payment_Gateway().setVisible(true);
+                new payment_Gateway(0).setVisible(true);
             }
         });
     }
@@ -314,6 +329,7 @@ public class payment_Gateway extends javax.swing.JFrame {
     private javax.swing.JTextField NameTxt;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox cashChk;
+    private javax.swing.JLabel errorMsg;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -340,6 +356,7 @@ public class payment_Gateway extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private long dateDifference(String initDay, String finalDay) {
+        //Calculates the date difference for two String parameters - First date and last date
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
         long days = 0;
         try {

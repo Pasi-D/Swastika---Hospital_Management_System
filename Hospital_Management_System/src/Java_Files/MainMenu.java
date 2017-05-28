@@ -41,6 +41,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(560, 503));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        labAssistantButton.setFont(new java.awt.Font("Perpetua Titling MT", 1, 11)); // NOI18N
         labAssistantButton.setText("Lab Assistant");
         labAssistantButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,6 +50,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jPanel1.add(labAssistantButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 170, 60));
 
+        AdminButton.setFont(new java.awt.Font("Perpetua Titling MT", 1, 11)); // NOI18N
         AdminButton.setText("Administrator");
         AdminButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,6 +59,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jPanel1.add(AdminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 170, 60));
 
+        doctorButton.setFont(new java.awt.Font("Perpetua Titling MT", 1, 11)); // NOI18N
         doctorButton.setText("Doctor");
         doctorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,6 +68,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jPanel1.add(doctorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 170, 60));
 
+        nurseButton.setFont(new java.awt.Font("Perpetua Titling MT", 1, 11)); // NOI18N
         nurseButton.setText("Nurse");
         nurseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

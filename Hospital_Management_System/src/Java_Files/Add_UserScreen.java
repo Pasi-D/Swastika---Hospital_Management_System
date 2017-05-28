@@ -27,8 +27,10 @@ String newpath;
     /**
      * Creates new form Add_UserScreen
      */
+    
     public Add_UserScreen() {
         initComponents();
+        
     }
 
     /**
@@ -67,6 +69,8 @@ String newpath;
         jScrollPane1 = new javax.swing.JScrollPane();
         jAddress = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
+        WardAssignedJtxt = new javax.swing.JLabel();
+        wardNamesComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 400));
@@ -133,7 +137,12 @@ String newpath;
         FemaleButton.setText("Female");
         jPanel1.add(FemaleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
 
-        combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "doctor", "nurse", "labtechnician", "administrator" }));
+        combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nurse", "doctor", "labtechnician", "administrator" }));
+        combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboActionPerformed(evt);
+            }
+        });
         jPanel1.add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 140, -1));
 
         jButton3.setText("Cancel");
@@ -156,7 +165,7 @@ String newpath;
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 110, -1));
 
         jLabel10.setText("contact");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
@@ -172,18 +181,24 @@ String newpath;
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 280, 60));
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 370, 20));
 
+        WardAssignedJtxt.setText("Assigned Ward");
+        jPanel1.add(WardAssignedJtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, -1, 20));
+
+        wardNamesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maternity", "Pediatrics", "Oncology", "Gynecologist", "General surgery" }));
+        jPanel1.add(wardNamesComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(435, 646));
+        setSize(new java.awt.Dimension(447, 646));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,7 +209,8 @@ String newpath;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {        
             //ResultSet RS = dbcon.search("SELECT * FROM "+table+ "WHERE fid='"+fid.getText()+"'");
-            JFileChooser jc = new JFileChooser(new File("C:/Users/Pasindu/Pictures"));
+            JFileChooser jc = new JFileChooser(new File("E:/SCS Second Year/SCS 2104 Programming 3/Assignments/Take_Home_Assignment2017/Meta data for sample data sets"));
+            //C:/Users/Pasindu/Pictures
             int x = jc.showOpenDialog(this);
             if (x == jc.APPROVE_OPTION) {
                 File f1 = jc.getSelectedFile();
@@ -215,6 +231,17 @@ String newpath;
         //Save into tables here
         
         String table = combo.getSelectedItem().toString();
+        int wardNum = -1; //This value is checked in Create_UName_Pword screen and validated
+        if (table.equals("nurse")) {
+            /*Ward numbers 
+                0 - Maternity, 
+                1 - Pediatrics,
+                2 - Oncology,
+                3 - Gynecologist,
+                4 - General surgery
+            */
+            wardNum =  wardNamesComboBox.getSelectedIndex();
+        }
         String firstName = FName.getText();
         String lastName = LName.getText();        
         String Gender;
@@ -241,7 +268,7 @@ String newpath;
         
         ResetFields();
         
-        create_UName_Pword newUNameandPass = new create_UName_Pword(IDNum, table);
+        create_UName_Pword newUNameandPass = new create_UName_Pword(IDNum, table, wardNum);
         newUNameandPass.setVisible(true);
         
     } catch (Exception ex) {
@@ -262,6 +289,17 @@ String newpath;
         MaleButton.setSelected(true);
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
+        //When clicked on the combo box event is other combo box pops up or not
+        if (combo.getSelectedIndex() != 0) {
+            WardAssignedJtxt.setEnabled(false);
+            wardNamesComboBox.setEnabled(false);
+        }else{
+            WardAssignedJtxt.setEnabled(true);
+            wardNamesComboBox.setEnabled(true);
+        }
+    }//GEN-LAST:event_comboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,6 +342,7 @@ String newpath;
     private javax.swing.JTextField LName;
     private javax.swing.JRadioButton MaleButton;
     private javax.swing.JTextField NIC;
+    private javax.swing.JLabel WardAssignedJtxt;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox combo;
     private javax.swing.JTextField contact;
@@ -326,6 +365,7 @@ String newpath;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox wardNamesComboBox;
     // End of variables declaration//GEN-END:variables
 
     private void ResetFields() {
@@ -335,6 +375,6 @@ String newpath;
         NIC.setText(null);
         contact.setText(null);
         jAddress.setText(null);
-        
+        img.setIcon(null);
     }
 }

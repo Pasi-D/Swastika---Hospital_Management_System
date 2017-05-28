@@ -83,7 +83,7 @@ public class Administrator_Screen extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 120, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 160, 50));
 
         jButton2.setText("Exit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +99,7 @@ public class Administrator_Screen extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 120, 50));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 50));
 
         jButton4.setText("Mark Attendance");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +107,7 @@ public class Administrator_Screen extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 120, 50));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 160, 50));
 
         jButton5.setText("Manage Payments");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,7 @@ public class Administrator_Screen extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 120, 50));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 160, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,7 +155,7 @@ public class Administrator_Screen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Admin_Dashboard adDash = new Admin_Dashboard();
+        Admin_Dashboard adDash = new Admin_Dashboard(employeeId);
         adDash.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 

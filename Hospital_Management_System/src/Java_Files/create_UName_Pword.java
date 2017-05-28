@@ -23,10 +23,12 @@ public class create_UName_Pword extends javax.swing.JFrame {
     
     private String NICNum;
     private String UserType;
-    public create_UName_Pword(String IDNumber, String UsrType) {
+    private int wardNumber;
+    public create_UName_Pword(String IDNumber, String UsrType, int wardId) {
         initComponents();
         NICNum = IDNumber;
         UserType = UsrType;
+        wardNumber = wardId;
     }
 
     /**
@@ -128,7 +130,12 @@ public class create_UName_Pword extends javax.swing.JFrame {
             Rs = dbcon.search("SELECT * FROM employee WHERE NIC='"+NICNum+"'");
             while (Rs.next()) {                
                 int empID = Rs.getInt(1);
-                dbcon.IUD("INSERT INTO "+UserType+" (empId, username, password) VALUES ("+empID+", '"+uName+"', '"+uPass+"')");
+                if (wardNumber >= 0) {
+                    dbcon.IUD("INSERT INTO "+UserType+" (empId, wardId, username, password) VALUES ("+empID+", "+wardNumber+", '"+uName+"', '"+uPass+"')");
+                }else{
+                    dbcon.IUD("INSERT INTO "+UserType+" (empId, username, password) VALUES ("+empID+", '"+uName+"', '"+uPass+"')");
+                }
+                
             }
              // create a jframe
             JFrame frame = new JFrame("JOptionPane showMessageDialog example");
@@ -138,6 +145,8 @@ public class create_UName_Pword extends javax.swing.JFrame {
                 "Your data has been saved",
                 "Success",
                 JOptionPane.INFORMATION_MESSAGE);
+            
+            this.dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -146,8 +155,9 @@ public class create_UName_Pword extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //This has to be fixed - 27/05/2017 11:58AM
         try {
-            ResultSet chkAvailable = dbcon.search("SELECT * FROM doctor WHERE username='"+userName.getText()+"'");
+            ResultSet chkAvailable = dbcon.search("SELECT * FROM "+UserType+" WHERE username='"+userName.getText()+"'");
             if (chkAvailable.next()) {
                  // create a jframe
                 JFrame frame = new JFrame("JOptionPane showMessageDialog example");
@@ -159,6 +169,15 @@ public class create_UName_Pword extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
                 userName.setText(null);
                 passWord.setText(null);
+            }else{
+                JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+
+                // show a joptionpane dialog using showMessageDialog
+                JOptionPane.showMessageDialog(frame,
+                "This username can be used",
+                "Valid username",
+                JOptionPane.INFORMATION_MESSAGE);
+                
             }
             
         } catch (Exception ex) {
@@ -207,7 +226,7 @@ public class create_UName_Pword extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new create_UName_Pword("General", "General").setVisible(true);
+                new create_UName_Pword("General", "General", 0).setVisible(true);
             }
         });
     }

@@ -130,8 +130,10 @@ public class create_UName_Pword extends javax.swing.JFrame {
             Rs = dbcon.search("SELECT * FROM employee WHERE NIC='"+NICNum+"'");
             while (Rs.next()) {                
                 int empID = Rs.getInt(1);
-                if (wardNumber >= 0) {
+                if (wardNumber >= 0 && wardNumber <= 4) {
                     dbcon.IUD("INSERT INTO "+UserType+" (empId, wardId, username, password) VALUES ("+empID+", "+wardNumber+", '"+uName+"', '"+uPass+"')");
+                }else if(wardNumber > 4 ){
+                    dbcon.IUD("INSERT INTO "+UserType+" (empId, roomId, username, password) VALUES ("+empID+", "+wardNumber+", '"+uName+"', '"+uPass+"')");
                 }else{
                     dbcon.IUD("INSERT INTO "+UserType+" (empId, username, password) VALUES ("+empID+", '"+uName+"', '"+uPass+"')");
                 }

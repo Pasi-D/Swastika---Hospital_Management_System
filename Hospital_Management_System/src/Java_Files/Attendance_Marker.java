@@ -26,6 +26,7 @@ public class Attendance_Marker extends javax.swing.JFrame {
     public Attendance_Marker() {
         initComponents();
         showtime();
+        jDateChooser1.setDate(new Date());
     }
 
     /**
@@ -82,7 +83,7 @@ public class Attendance_Marker extends javax.swing.JFrame {
         jPanel1.add(timePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
 
         jDateChooser1.setDateFormatString("yyyy-MM-d"); // NOI18N
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 130, -1));
 
         jLabel5.setText("Out Time");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
@@ -220,6 +221,7 @@ public class Attendance_Marker extends javax.swing.JFrame {
                 String dt = sdf2.format(d);
                 time.setText(tt);
                 date.setText(dt);
+                
             }
         }).start();
     }

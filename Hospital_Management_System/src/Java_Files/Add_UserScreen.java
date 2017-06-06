@@ -30,7 +30,8 @@ String newpath;
     
     public Add_UserScreen() {
         initComponents();
-        
+        RoomAssignedJtxt.setEnabled(false);
+        RoomIdCombo.setEnabled(false);
     }
 
     /**
@@ -71,6 +72,8 @@ String newpath;
         jLabel7 = new javax.swing.JLabel();
         WardAssignedJtxt = new javax.swing.JLabel();
         wardNamesComboBox = new javax.swing.JComboBox();
+        RoomAssignedJtxt = new javax.swing.JLabel();
+        RoomIdCombo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 400));
@@ -101,7 +104,7 @@ String newpath;
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         img.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 130, 150));
+        jPanel1.add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 130, 150));
 
         jButton1.setText("Upload");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +112,7 @@ String newpath;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, -1, -1));
 
         jButton2.setText("Save");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +120,7 @@ String newpath;
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, -1, -1));
 
         FName.setPreferredSize(new java.awt.Dimension(5, 20));
         FName.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +154,7 @@ String newpath;
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 610, -1, -1));
 
         jButton4.setText("Exit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -159,26 +162,26 @@ String newpath;
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 580, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 610, -1, -1));
 
         jLabel9.setText("Date of Birth");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 110, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 190, -1));
 
         jLabel10.setText("contact");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
-        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 290, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 290, -1));
 
         jLabel11.setText("Address");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
         jAddress.setColumns(20);
         jAddress.setRows(5);
         jScrollPane1.setViewportView(jAddress);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 280, 60));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 280, 60));
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 370, 20));
 
         WardAssignedJtxt.setText("Assigned Ward");
@@ -187,18 +190,26 @@ String newpath;
         wardNamesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Maternity", "Pediatrics", "Oncology", "Gynecologist", "General surgery" }));
         jPanel1.add(wardNamesComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
 
+        RoomAssignedJtxt.setText("Assigned Room");
+        jPanel1.add(RoomAssignedJtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 100, -1));
+
+        RoomIdCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
+        jPanel1.add(RoomIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 70, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(447, 646));
+        setSize(new java.awt.Dimension(451, 687));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -241,7 +252,17 @@ String newpath;
                 4 - General surgery
             */
             wardNum =  wardNamesComboBox.getSelectedIndex();
+        }else if (table.equals("labtechnician")) {
+            //Ward numbers 
+            /*
+                roomID 1 == ward num 5
+                roomID 2 == ward num 6
+                roomID 3 == ward num 7
+                roomID 4 == ward num 8
+            */
+            wardNum = RoomIdCombo.getSelectedIndex() + 5;
         }
+        
         String firstName = FName.getText();
         String lastName = LName.getText();        
         String Gender;
@@ -292,6 +313,17 @@ String newpath;
 
     private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
         //When clicked on the combo box event is other combo box pops up or not
+        
+        
+        if (combo.getSelectedIndex() != 2) {
+            RoomAssignedJtxt.setEnabled(false);
+            RoomIdCombo.setEnabled(false);
+        }else{
+            RoomAssignedJtxt.setEnabled(true);
+            RoomIdCombo.setEnabled(true);
+        }
+        
+        
         if (combo.getSelectedIndex() != 0) {
             WardAssignedJtxt.setEnabled(false);
             wardNamesComboBox.setEnabled(false);
@@ -342,6 +374,8 @@ String newpath;
     private javax.swing.JTextField LName;
     private javax.swing.JRadioButton MaleButton;
     private javax.swing.JTextField NIC;
+    private javax.swing.JLabel RoomAssignedJtxt;
+    private javax.swing.JComboBox RoomIdCombo;
     private javax.swing.JLabel WardAssignedJtxt;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox combo;

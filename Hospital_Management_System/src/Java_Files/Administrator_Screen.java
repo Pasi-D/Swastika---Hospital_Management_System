@@ -138,20 +138,17 @@ public class Administrator_Screen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Add_UserScreen newUsr = new Add_UserScreen();
-        newUsr.setVisible(true);
-        this.dispose();
+        newUsr.setVisible(true);        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Attendance_Marker AttendMark = new Attendance_Marker();
-        AttendMark.setVisible(true);
-        this.dispose();
+        AttendMark.setVisible(true);        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         payment_Screen payPhone = new payment_Screen(employeeId);
-        payPhone.setVisible(true);
-        this.dispose();
+        payPhone.setVisible(true);        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

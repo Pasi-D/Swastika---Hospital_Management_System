@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -74,14 +76,16 @@ public class Add_tests extends javax.swing.JFrame {
 
         jLabel5.setText("Description");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
+
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 150, -1));
         jPanel1.add(pID, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 90, -1));
 
         Desc.setColumns(20);
         Desc.setRows(5);
         jScrollPane1.setViewportView(Desc);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 230, 60));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 280, 70));
 
         jLabel6.setText("Prescribed Doctor ID");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
@@ -105,7 +109,7 @@ public class Add_tests extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 180, 100));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 180, 100));
 
         jButton1.setFont(new java.awt.Font("Verdana Pro Cond", 0, 14)); // NOI18N
         jButton1.setText("view");
@@ -125,7 +129,7 @@ public class Add_tests extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 70, 30));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 70, 30));
 
         jButton3.setText("Save");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -190,8 +194,7 @@ public class Add_tests extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Lab_Techician_Profile LTProf = new Lab_Techician_Profile(LTId);
-        LTProf.setVisible(true);
+
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -213,8 +216,22 @@ public class Add_tests extends javax.swing.JFrame {
                 TestID = RS.getInt(1);
             }            
             dbcon.IUD("INSERT into testing (testId, patientId, labTechId, conductDate) VALUES ("+TestID+", "+PatientId+", "+LTId+", '"+conductDate+"')");
+            // create a jframe
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+
+            // show a joptionpane dialog using showMessageDialog
+            JOptionPane.showMessageDialog(frame,
+                "Successfully added","Data Collected",JOptionPane.INFORMATION_MESSAGE);
+            
+            clearFields();
         } catch (Exception ex) {
             ex.printStackTrace();
+            // create a jframe
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+
+            // show a joptionpane dialog using showMessageDialog
+            JOptionPane.showMessageDialog(frame,
+                "Oops something went wrong","Query Failed",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -277,6 +294,10 @@ public class Add_tests extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void clearFields() {
-        
+        pID.setText(null);
+        DocId.setText(null);
+        jDateChooser1.setDate(null);
+        TName.setText(null);
+        Desc.setText(null);
     }
 }
